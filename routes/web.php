@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PlayerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('submitLogin');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware('player')->group(function () {
+    Route::prefix('players')->group(function () {
+        Route::get('/create', [PlayerController::class, 'create'])->name('back.players.create');
+        Route::post('/insert', [PlayerController::class, 'insert'])->name('back.players.insert');
+    });
 });
