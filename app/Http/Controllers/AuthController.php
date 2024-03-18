@@ -9,9 +9,10 @@ use App\Models\Player;
 
 class AuthController extends Controller
 {
+
     public function showLoginForm()
     {
-        return view('front.auth.login');
+        return view('auth.login');
     }
 
     public function login(Request $request)

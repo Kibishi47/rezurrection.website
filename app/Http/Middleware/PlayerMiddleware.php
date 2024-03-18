@@ -14,6 +14,6 @@ class PlayerMiddleware
             return $next($request);
         }
 
-        return redirect()->route('front.login'); // Adapt to your login route
+        return redirect()->route('login'); // Adapt to your login route
     }
 }
