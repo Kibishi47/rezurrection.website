@@ -16,6 +16,12 @@ class Player extends Model implements Authenticatable
     protected $fillable = [
         'username',
         'password',
-        'roles'
+        'roles',
+        'remember_token'
     ];
+
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'author_id');
+    }
 }

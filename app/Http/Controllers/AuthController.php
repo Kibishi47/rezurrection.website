@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
-
+        // dd($request->remember);
         if (Auth::attempt($credentials, $request->remember)) {
             // Authentification réussie
             return redirect()->intended('/');
@@ -33,6 +33,9 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $player = Auth::user();
+        $player->remember_token = null;
+        $player->save();
         Auth::logout();
         return redirect()->route('login');
     }

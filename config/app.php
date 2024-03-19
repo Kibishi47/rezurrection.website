@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Rezurrection'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'dev.rezurrection.website'),
+    
+    'local_url' => env('APP_LOCAL_URL', '127.0.0.1:8000'),
 
     'asset_url' => env('ASSET_URL'),
 

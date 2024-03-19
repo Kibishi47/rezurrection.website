@@ -3,14 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 use App\Models\Log;
 use App\Models\Player;
 
 class PlayerController extends Controller
 {
+    public function list()
+    {
+        $players = Player::all();
+        return view('back.players.list', [
+            'players' => $players
+        ]);
+    }
+
+    public function view($id)
+    {
+        $player = Player::findOrFail($id);
+        return view('back.players.view', [
+            'player' => $player
+        ]);
+    }
+
     public function create()
     {
         return view('back.players.create');
@@ -26,38 +42,20 @@ class PlayerController extends Controller
 
         // Créer un nouveau joueur
         $player = Player::create([
-            'username' => $request->username,
+            'username' => Str::Title($request->username),
             'password' => Hash::make($request->password),
-            // Ajoutez d'autres champs si nécessaire
         ]);
 
         $logData = [
-            'event' => "Création",
-            'description' => "Création d'un joueur",
+            'event' => "Création d'un joueur",
+            'description' => "Création du joueur : " . $player->username,
             'modelable_id' => $player->id,
             'modelable_type' => get_class($player),
         ];
 
-        $this->createLog($logData);
+        Log::createLog($logData);
 
         // Rediriger avec un message de succès
         return redirect()->route('back.players.create')->with('success', 'Joueur créé avec succès.');
-    }
-
-
-
-
-
-    
-
-    private function createLog($logData)
-    {
-        Log::create([
-            'author_id' => Auth::id(),
-            'event' => $logData['event'],
-            'description' => $logData['description'],
-            'modelable_id' => $logData['modelable_id'],
-            'modelable_type' => $logData['modelable_type']
-        ]);
     }
 }
