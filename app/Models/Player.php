@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\PlayerRole;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
@@ -16,7 +18,7 @@ class Player extends Model implements Authenticatable
     protected $fillable = [
         'username',
         'password',
-        'roles',
+        'roles_id',
         'remember_token'
     ];
 
@@ -24,4 +26,10 @@ class Player extends Model implements Authenticatable
     {
         return $this->hasMany(Log::class, 'author_id');
     }
+
+    public function roles()
+    {
+        return PlayerRole::whereIn('id', json_decode($this->roles_id ?? "[]"))->get();
+    }
+
 }

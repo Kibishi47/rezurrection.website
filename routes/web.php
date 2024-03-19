@@ -23,10 +23,16 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('player')->group(function () {
     Route::get('/', [FrontController::class, 'dashboard'])->name('dashboard');
-    Route::prefix('players')->group(function () {
-        Route::get('/list', [PlayerController::class, 'list'])->name('back.players.list');
-        Route::get('/view/{id}', [PlayerController::class, 'view'])->name('back.players.view');
-        Route::get('/create', [PlayerController::class, 'create'])->name('back.players.create');
-        Route::post('/insert', [PlayerController::class, 'insert'])->name('back.players.insert');
+    Route::prefix('BO')->group(function () {
+        Route::prefix('players')->group(function () {
+            Route::get('/list', [PlayerController::class, 'list'])->name('back.players.list');
+            Route::get('/view/{id}', [PlayerController::class, 'view'])->name('back.players.view');
+            Route::get('/create', [PlayerController::class, 'create'])->name('back.players.create');
+            Route::post('/insert', [PlayerController::class, 'insert'])->name('back.players.insert');
+        });
     });
+});
+
+Route::middleware('adminPlayer')->group(function () {
+    Route::get('test', [PlayerController::class, 'list'])->name('user');
 });

@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 
 use App\Models\Log;
 use App\Models\Player;
+use App\Models\PlayerRole;
 
 class PlayerController extends Controller
 {
@@ -29,7 +30,10 @@ class PlayerController extends Controller
 
     public function create()
     {
-        return view('back.players.create');
+        $playerRoles = PlayerRole::all();
+        return view('back.players.create', [
+            'playerRoles' => $playerRoles
+        ]);
     }
 
     public function insert(Request $request)
@@ -44,6 +48,7 @@ class PlayerController extends Controller
         $player = Player::create([
             'username' => Str::Title($request->username),
             'password' => Hash::make($request->password),
+            'roles_id' => $request->roles ? json_encode($request->roles) : null
         ]);
 
         $logData = [

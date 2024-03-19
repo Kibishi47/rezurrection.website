@@ -2,6 +2,14 @@
 
 @section('title', 'Créer un joueur')
 
+@section('js')
+<script>
+    $(document).ready(function (){
+        $("#roles").select2();
+    });
+</script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -25,6 +33,15 @@
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
                             <input id="password" type="password" class="form-control" name="password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roles">Roles</label>
+                            <select class="form-control" name="roles[]" id="roles" multiple>
+                                @foreach ($playerRoles as $playerRole)
+                                    <option value="{{ $playerRole->id }}">{{ $playerRole->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Créer</button>

@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [    
         'player' => \App\Http\Middleware\PlayerMiddleware::class,
+        'adminPlayer' => \App\Http\Middleware\AdminPlayerMiddleware::class,
     ];
     
 }
