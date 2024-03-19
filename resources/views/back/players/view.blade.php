@@ -5,22 +5,36 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Liste de joueurs</div>
-
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Détails du joueur : {{ $player->username }}</h3>
+                    <div>
+                        <a href="{{ route('back.players.edit', $player->id) }}" class="btn btn-warning">Modifier</a>
+                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <a href="{{ route('back.players.list') }}" class="btn btn-secondary">Retour</a>
+                    </div>
+                </div>
                 <div class="card-body">
                     @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
 
-                    <h1>{{ $player->username }}</h1>
+                    <h2>Nom d'utilisateur : {{ $player->username }}</h2>
+                    <h3>Rôles :</h3>
+                    <ul>
+                        @foreach ($player->roles as $role)
+                            <li>{{ $role->name }}</li>
+                        @endforeach
+                    </ul>
 
-                    <table>
+                    <table class="table table-striped">
                         <thead>
-                            <th>Date</th>
-                            <th>Event</th>
-                            <th>Description</th>
+                            <tr>
+                                <th>Date</th>
+                                <th>Event</th>
+                                <th>Description</th>
+                            </tr>
                         </thead>
                         <tbody>
                             @foreach ($player->logs as $log)
