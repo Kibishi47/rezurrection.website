@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PlayerController;
 
 /*
@@ -22,7 +22,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('submitLogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('player')->group(function () {
-    Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::get('/', [FrontController::class, 'dashboard'])->name('dashboard');
     Route::prefix('players')->group(function () {
         Route::get('/create', [PlayerController::class, 'create'])->name('back.players.create');
         Route::post('/insert', [PlayerController::class, 'insert'])->name('back.players.insert');

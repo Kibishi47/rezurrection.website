@@ -12,6 +12,9 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
         return view('auth.login');
     }
 
@@ -19,7 +22,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             // Authentification réussie
             return redirect()->intended('/');
         }
