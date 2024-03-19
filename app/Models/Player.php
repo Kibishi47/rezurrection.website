@@ -6,12 +6,13 @@ use App\Models\PlayerRole;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class Player extends Model implements Authenticatable
 {
-    use HasFactory, AuthenticatableTrait;
+    use HasFactory, AuthenticatableTrait, SoftDeletes;
 
     protected $table = 'players';
 
@@ -27,7 +28,7 @@ class Player extends Model implements Authenticatable
         return $this->hasMany(Log::class, 'author_id');
     }
 
-    public function roles()
+    public function getRolesAttribute()
     {
         return PlayerRole::whereIn('id', json_decode($this->roles_id ?? "[]"))->get();
     }

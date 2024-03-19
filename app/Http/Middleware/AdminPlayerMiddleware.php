@@ -15,7 +15,7 @@ class AdminPlayerMiddleware
         if(Auth::check()) {
             $player = Auth::user();
             $adminRole = PlayerRole::where('name', "Admin")->first();
-            if ($player->roles()->contains($adminRole)) {
+            if ($player->roles->contains($adminRole)) {
                 return $next($request);
             }
         }

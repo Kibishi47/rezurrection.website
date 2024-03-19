@@ -29,6 +29,9 @@ Route::middleware('player')->group(function () {
             Route::get('/view/{id}', [PlayerController::class, 'view'])->name('back.players.view');
             Route::get('/create', [PlayerController::class, 'create'])->name('back.players.create');
             Route::post('/insert', [PlayerController::class, 'insert'])->name('back.players.insert');
+            Route::get('/edit/{id}', [PlayerController::class, 'edit'])->name('back.players.edit');
+            Route::post('/update/{id}', [PlayerController::class, 'update'])->name('back.players.update');
+            Route::get('/delete/{id}', [PlayerController::class, 'delete'])->name('back.players.delete');
         });
     });
 });
