@@ -11,7 +11,7 @@
                     <h3 class="card-title">Détails du joueur : {{ $player->username }}</h3>
                     <div>
                         <a href="{{ route('back.players.edit', $player->id) }}" class="btn btn-warning">Modifier</a>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                        <a href="{{ route('back.players.delete', $player->id) }}" class="btn btn-danger">Supprimer</a>
                         <a href="{{ route('back.players.list') }}" class="btn btn-secondary">Retour</a>
                     </div>
                 </div>
