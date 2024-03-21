@@ -5,7 +5,6 @@ html, body {
 }
 .sidebar {
     height: 100%;
-    width: 280px;
     position: fixed;
     top: 0;
     left: 0;
@@ -13,12 +12,16 @@ html, body {
     padding-top: 60px; /* Hauteur du header */
 }
 .main-content {
-    margin-left: 280px; /* Largeur de la sidebar */
-    padding-top: 60px; /* Hauteur du header */
+    padding-top: 80px; /* Hauteur du header */
 }
 header {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000; /* Assure que le header est au-dessus de tout */
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

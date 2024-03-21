@@ -3,19 +3,19 @@
 @section('title', 'Liste de joueurs')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">Liste de joueurs</h3>
-                    <a href="{{ route('back.players.create') }}" class="btn btn-success">Ajouter un joueur</a>
-                </div>
-                <div class="card-body">
-                    @if(session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="card-title">Liste de joueurs</h3>
+                <a href="{{ route('back.players.create') }}" class="btn btn-success">Ajouter un joueur</a>
+            </div>
+            <div class="card-body">
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
 
+                <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
